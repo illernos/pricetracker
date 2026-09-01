@@ -1,0 +1,36 @@
+name: Prisbevakning
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  check-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installera beroenden
+        run: pip install -r requirements.txt
+
+      - name: Hämta priser
+        run: python price_tracker.py
+
+      - name: Bygg dashboard
+        run: python generate_dashboard.py
+
+      - name: Committa uppdaterad data
+        run: |
+          git config user.name "pristracker-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/price_history.csv docs/index.html
+          git diff --cached --quiet && echo "Inga förändringar" || git commit -m "Prisuppdatering $(date -u +%Y-%m-%d)"
+          git push

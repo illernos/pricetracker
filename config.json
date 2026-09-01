@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "name": "Sennheiser HDB 630",
+      "sources": [
+        {
+          "retailer": "HiFi Klubben",
+          "url": "https://www.hifiklubben.se/sennheiser-hdb-630-traadlost-headset/senhdb630bk/"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "request_delay_seconds": 3,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "timeout_seconds": 15
+  }
+}
